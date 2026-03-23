@@ -23,7 +23,7 @@ export default function RootLayout() {
           options={{
             title: "Home title",
             drawerLabel : "Home Label",
-            drawerIcon: ({color}) => (
+            drawerIcon: ({color}: any) => (
               <FontAwesome name="home" size={24} color={color} />
             )
           }}
@@ -34,7 +34,7 @@ export default function RootLayout() {
           options={{
             title: "Dashboard title",
             drawerLabel : "Dashboard Label",
-            drawerIcon: ({color}) => (
+            drawerIcon: ({color}: any) => (
               <FontAwesome name="dashboard" size={24} color={color} />
             )
           }}
@@ -45,7 +45,7 @@ export default function RootLayout() {
           options={{
             title: "Settings title",
             drawerLabel : "Settings Label",
-            drawerIcon: ({color}) => (
+            drawerIcon: ({color}: any) => (
               <FontAwesome name="cog" size={24} color={color} />
             )
           }}
