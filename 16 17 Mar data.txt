@@ -1,0 +1,353 @@
+16 17 Feb 
+
+Component → UI block
+Props → data from outside
+State → internal changing data
+Hooks → tools to manage state & lifecycle
+
+
+React native setup
+View, Text, Image (assets, network), ImageBackground, ScrollView, Button, Pressable
+useState, Modal, StatusBar, ActivityIndicator, Alert, SafeAreaView
+Custom Components
+Style, StyleSheet API, Multiple Style, boxModel, boxShadow (androidShadow), Style Inheritance  
+
+---------------------------------------------------------------------------
+
+Button
+<View style={{flex: 1, padding:40}}>
+      <Button 
+        title='Pressed' 
+        onPress={() => console.log("Button Pressed")} 
+        color= 'midnightblue'
+      />
+</View>
+---------------------------------------------------------------------------
+
+Pressable
+<Pressable 
+        onPress={() => console.log('Image Press')}
+        onLongPress={() => console.log('Image long Press')}
+        onPressIn={() => console.log('Image onPress in')}
+        onPressOut={() => console.log('Image onPress Out')}
+      >
+          <Image
+            source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }} 
+            style={{ width: 300, height: 300 }}
+          />
+</Pressable>
+
+---------------------------------------------------------------------------
+Modal
+
+ const [isModalVisible, setIsModalVisible] = useState(false);
+  return (
+    <View style={{flex:1, backgroundColor:"plum", padding:60}}>
+      <View style={{flex: 1, padding:40}}>
+        <Button title="Press" color= "midnightblue" onPress={() => setIsModalVisible(true)} />
+      </View>
+      <Modal
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}
+        animationType='fade'
+      >
+        <View style={{flex: 1, backgroundColor: "yellow", padding:40}}>
+          <Button title="Close" color= "midnightblue" onPress={() => setIsModalVisible(false)}/>      
+        </View>
+      </Modal>
+    </View>
+  )
+---------------------------------------------------------------------------
+StatusBar
+<View style={{flex:1, backgroundColor:"plum", padding:60}}>
+      <StatusBar backgroundColor='lightgreen' />
+    </View>
+
+---------------------------------------------------------------------------
+ActivityIndicator
+<View style={{flex:1, backgroundColor:"plum", padding:60}} >
+      <ActivityIndicator  />      
+      <ActivityIndicator size='large' />
+      <ActivityIndicator size='large' color='midnightblue'/>
+      <ActivityIndicator size='large' color='midnightblue' animating={false} />
+    </View>
+
+---------------------------------------------------------------------------
+Alert
+ <View style={{flex:1, backgroundColor:"plum", padding:60}} >
+      <Button
+        title='Alert' 
+        onPress={() => Alert.alert("Invalid data")}
+      />
+      <Button
+        title='Alert 2' 
+        onPress={() => Alert.alert("Invalid data" , "DOB wrong")}
+      />
+      <Button
+        title='Alert 3' 
+        onPress={() => Alert.alert("Invalid data" , "DOB wrong", [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel pressed') 
+          },
+          {
+            text: 'OK',
+            onPress: () => console.log('OK pressed') 
+          }
+        ])}
+      />
+    </View>
+---------------------------------------------------------------------------
+
+Custom Components
+export default function Greet({name}) {
+    return (
+        <View>
+            <Text>Hello, {name} </Text>
+        </View>
+    );
+}
+
+<View style={{flex:1, backgroundColor:"plum", padding:60}} >
+      <Greet name="YASH"/>
+      <Greet name="YASH2"/>
+</View>
+
+---------------------------------------------------------------------------
+Style, StyleSheet API, Multiple Style, boxModel, boxShadow (androidShadow), 
+Style Inheritance
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+
+      <View style={styles.darkMode} >
+        <Text style={styles.darkModeText}>Style Inheritance
+          <Text style={styles.inBold}> in bold</Text>
+        </Text>
+      </View>
+
+      <View style={[ styles.lightbluebg, styles.box, styles.boxShadow]} >
+        <Text style={{borderRadius:5, backgroundColor: "red"}}>StyleSheet API</Text>
+      </View>
+      <View style={[styles.box, styles.lightgreenbg, styles.androidShadow]} >
+        <Text style={styles.title}>StyleSheet API</Text>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {flex:1, backgroundColor:"plum", padding: 60},
+  darkMode: {
+    backgroundColor: "black"
+  },
+  darkModeText: {
+    color: "white"
+  },
+  inBold: {
+    fontWeight: "bold"
+  },
+  box: {
+    width:250, 
+    height: 250, 
+    //padding:10, 
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+    borderWidth:2,
+    borderColor: "purple",
+    borderRadius: 6,
+    
+  },
+  lightbluebg: {backgroundColor:"lightblue"},
+  lightgreenbg: {backgroundColor:"lightgreen"},
+  boxShadow: {
+    shadowColor: "blue",
+    shadowOffset: {width: 6, height: 6},
+    shadowOpacity: 0.6,
+    shadowRadius: 4
+  },
+  title: {},
+  // for android
+  androidShadow: {
+    shadowColor: "red",
+    elevation: 15
+  }
+});
+
+---------------------------------------------------------------------------
+
+Layout with FlexBox
+1 flex (1, 2, 3)
+2 flexDirection (column, column-reverse, row, row-reverse)
+3 justifyContent (flex-start, flex-end, center, space-between, space-around, space-evenly)
+4 alignItems (stretch, flex-start, flex-end, center, baseline-(text in same line))
+5 alignSelf (auto, flex-start, flex-end, center, baseline-(text in same line))
+6 flexWrap (nowrap, wrap, wrap-reverse)
+7 alignContent (stretch, flex-start, flex-end, center, space-between, space-around, space-evenly)
+8 gap (rowGap, columnGap)
+9 flexBasis (to set initial size of flex item)
+10 flexShrink (shrink items (relative to other items in container))
+11 flexGrow (take avaiable space (relative to other items in container))
+  if set 0 then nothing happens, if set to 1 then evenly take available space
+
+---------------------------------------------------------------------------
+Relative Layout
+  top, bottom, left, right
+
+Absolute Layout
+  position: "absolute", top, bottom, left, right
+---------------------------------------------------------------------------
+
+Dimensions API
+
+1 This doesnt work on it screen orientation changes
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "plum",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  box: {
+    width: windowWidth > 300 ? "70%" : "90%",
+    height: windowHeight > 600 ? "60%" : "90%",
+    backgroundColor: "lightblue",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  text: {
+    fontSize: windowWidth > 500 ? 50 : 24,
+  }
+});
+
+2 This works on screen orientation changes
+
+export default function App() {
+  const [dimensions, setDimensions] = useState ({
+    window: Dimensions.get("window"),
+  });
+
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener("change", ({ window }) => {
+      setDimensions({ window });
+    });
+    return () => subscription?.remove();
+  });
+
+  const { window } = dimensions;
+  const windowWidth = window.width;
+  const windowHeight = window.height
+  
+  return (
+    <View style={styles.container}>
+      <View style={[styles.box, {
+        width: windowWidth > 500 ? "70%"  : "90%",
+        height: windowHeight > 600 ? "60%" : "90%",
+      }]}>
+        <Text style={{ fontSize: windowWidth > 500 ? 50: 24}}> Welcome</Text>
+      </View>
+    </View>
+  );
+}
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
+console.log({ windowWidth, windowHeight});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "plum",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  box: {
+    //width: windowWidth > 300 ? "70%" : "90%",
+    //height: windowHeight > 600 ? "60%" : "90%",
+    backgroundColor: "lightblue",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  //text: {
+   // fontSize: windowWidth > 500 ? 50 : 24,
+  //}
+});
+
+3 Instead used useWindowDimensions (Simpler and Recommended way)
+
+export default function App() {
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
+  console.log({ windowWidth, windowHeight});
+
+  return (
+    <View style={styles.container}>
+      <View style={[styles.box, {
+        width: windowWidth > 500 ? "70%"  : "90%",
+        height: windowHeight > 600 ? "60%" : "90%",
+      }]}>
+        <Text style={{ fontSize: windowWidth > 500 ? 50: 24}}> Welcome</Text>
+      </View>
+    </View>
+  );
+}
+
+---------------------------------------------------------------------------
+SafeAreaView
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.box}>
+          <Text style={styles.text}>Welcome</Text>
+        </View>
+      </View>
+    </SafeAreaView>
+
+---------------------------------------------------------------------------
+
+Platform Specfic code
+Used CustomButton
+
+Always remember:
+If you create .android or .ios file → you MUST have a base .tsx file
+
+<SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.box}>
+          <Text style={styles.text}>Welcome</Text>
+          <CustomButton title="Press Me" onPress={() => alert("Pressed")}/>
+        </View>
+      </View>
+</SafeAreaView>
+
+const CustomButton = ({ onPress, title } : any) => (
+  <Pressable
+    onPress={onPress}
+    style={{
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "lightblue",
+      borderRadius: 5,
+      padding: 10,
+    }}
+  >
+    <Text style={{ color: "red", fontSize: 20 }}>{title}</Text>
+  </Pressable>
+);
+
+export default CustomButton;
+
+---------------------------------------------------------------------------
+
+Core Components
+Custom Components
+Styling
+Layouts
+Responsive styles

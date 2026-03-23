@@ -1,0 +1,155 @@
+Navigation
+
+1 Stack Navigation
+2 Drawer Navigation
+3 Tab Navigation
+
+Expo Router
+
+1 File Based Routing
+
+2 Dynamic Router (onLocalSearchParams) used { id } 
+
+3 Catch-all Segments (onLocalSearchParams) 
+- Used { rest } [used for if more deeper links (./products/best-sellers/playstation-5)]
+
+4 Not-found router - using (+not-found.tsx)
+
+5 Layout using _layout.tsx (Slots)
+
+6 Route Groups using (app) (auth)
+
+7 Navigation options
+  - Custom Link by asChild property and React Components (Pressable, Text)
+  - relativeToDirectory for using directorys path
+  - push, replace method for navigating to differnt screens
+  - redirect to redirect user from one screen to other
+
+---------------------------------------------------------------------------------------------------
+
+Navigation
+
+1 Stack Navigation
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+      <Stack.Navigator initialRouteName="Home" screenOptions={{
+        headerStyle: {
+              backgroundColor: "#6a51ae"
+            },
+            headerTitleStyle: { fontWeight: "bold", color: "white"},
+            headerRight: () => (
+              <Pressable onPress={() => {
+                alert("Menu button pressed");
+              }}>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Menu</Text>
+              </Pressable>
+            ),
+            contentStyle: {
+              backgroundColor: "#e8e4f3"
+            },
+      }}>
+        <Stack.Screen name= "Home" component={HomeScreen}
+          options={{title: "Welcome Home"}}
+        />
+        <Stack.Screen 
+          name= "About" 
+          component={AboutScreen} 
+          initialParams={{
+            name: "Guest"
+          }} 
+          //options={({ route }) => ({
+          //  title: route.params?.name,
+          //})}
+        />
+
+      </Stack.Navigator>
+  );
+}
+
+
+2 Drawer Navigation
+import "react-native-gesture-handler"
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen 
+                name="Dashboard" 
+                component={DashboardScreen}
+                options={{
+                    title: "My dashboard",
+                    drawerLabel: "Dashboard label",
+                    drawerActiveTintColor: "#333",
+                    drawerActiveBackgroundColor: "lightblue",
+                    drawerContentStyle: {
+                        backgroundColor: "#c6cbef"
+                    }
+
+                }}
+            />
+            <Drawer.Screen name="Settings" component={SettingsScreen}/>
+        </Drawer.Navigator>
+    );
+}
+
+
+3 Tab Navigation 
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+    return (
+        <Tab.Navigator
+            screenOptions={{
+                tabBarLabelPosition: "below-icon",
+                tabBarShowLabel: true,
+                tabBarActiveTintColor: "purple"
+            }}
+        >
+            <Tab.Screen name="Course List" component={CourseListsScreen}/>
+            <Tab.Screen name="Profile" component={ProfileScreen}
+                options={{
+                    tabBarLabel: "My Profile",
+                    tabBarIcon: ({ color }) => (
+                        <Ionicons name="person" size={20} color={color}/>
+                    ),
+                    tabBarBadge: 3,
+                    
+                }}
+            />
+            <Tab.Screen name="Settings" component={SettingsScreen}/>
+        </Tab.Navigator>
+    )
+}
+
+
+---------------------------------------------------------------------------------------------------
+
+Expo Router
+
+1 File Based Routing
+
+2 Dynamic Router (onLocalSearchParams) used { id } 
+
+3 Catch-all Segments (onLocalSearchParams) 
+- Used { rest } [used for if more deeper links (./products/best-sellers/playstation-5)]
+
+4 Not-found router - using (+not-found.tsx)
+
+5 Layout using _layout.tsx (Slots)
+
+6 Route Groups using (app) (auth)
+
+7 Navigation options
+  - Custom Link by asChild property and React Components (Pressable, Text)
+  - relativeToDirectory for using directorys path
+  - push, replace method for navigating to differnt screens
+  - redirect to redirect user from one screen to other

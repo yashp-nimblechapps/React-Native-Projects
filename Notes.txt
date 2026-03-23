@@ -1,0 +1,56 @@
+Create Reactcli Project
+
+npx @react-native-community/cli init MyApp
+cd MyApp
+npx react-native run-android
+
+
+Create Expo Project
+
+npx create-expo-app@latest ExpoRouterCourse or
+
+npx create-expo-app MyExpoApp
+cd MyExpoApp
+npx expo start
+
+npm install -g expo-cli
+npx create-expo-app myApp -t expo-template-blank-typescript
+code myApp
+
+To remove boilerplate code
+npm run reset-project
+
+A hook is a special function that lets you use React features.
+----------------------------------------------------------------------
+
+Always remember:
+If you create .android or .ios file → you MUST have a base .tsx file
+
+Simple Analogy
+Think like this:
+.android.tsx = special version for Android 
+.tsx = default version for everyone 
+ Without default → app gets confused
+
+
+
+
+ # install yellow
+$env:APP_THEME="yellow"; npx expo run:android
+
+# install red
+$env:APP_THEME="red"; npx expo run:android
+
+# install blue
+$env:APP_THEME="blue"; npx expo run:android
+
+
+
+For each app:
+$env:APP_THEME="yellow"
+npx expo run:android --variant release
+
+$env:APP_THEME="red"
+npx expo run:android --variant release
+$env:APP_THEME="blue"
+npx expo run:android --variant release
