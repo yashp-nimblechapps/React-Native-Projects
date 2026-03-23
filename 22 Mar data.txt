@@ -1,0 +1,98 @@
+Expo Router Stack Navigation
+Expo Router Tab Navigation
+Expo Router Drawer Navigation
+ExpoRouter_Modals
+ExpoRouter_PlatformSpecific
+ExpoRouter_APIRoutes
+
+-----------------------------------------------------------------------------------
+
+Expo Router Stack Navigation
+
+in _layout.tsx file
+<Stack>
+    <Stack.Screen>
+    <Stack.Screen>
+</Stack>
+
+-----------------------------------------------------------------------------------
+
+Expo Router Drawer Navigation
+
+<GestureHandlerRootView>
+    <Drawer
+        screenOptions:{{
+            
+        }}
+    >
+        <Drawer.Screen/>
+        <Drawer.Screen />
+        <Drawer.Screen 
+          name = "settings"
+          options={{
+            title: "Settings",
+            drawerLabel : "Settings",
+            drawerIcon: ({color}) => (
+              <FontAwesome name="cog" size={24} color={color} />
+            )
+          }}
+        />
+    </Drawer>
+ </GestureHandlerRootView>
+
+-------------------------------------------------------------------------
+ExpoRouter_Modals
+
+<Stack screenOptions={{ headerShown: true }}>
+  <Stack.Screen name="index" options={{ title: "Home" }} />
+  <Stack.Screen name="modal" options={{ title: "Modal",presentation: "fullScreenModal"}} />
+  
+  <Stack.Screen 
+    name="webmodal" 
+    options={{
+        title: "Web Modal", 
+        presentation: "transparentModal", 
+        animation: "fade", 
+        headerShown: false
+    }} 
+  />
+</Stack>
+
+-------------------------------------------------------------------------
+ExpoRouter_PlatformSpecific
+
+Platfrom Specific code of about screen as 
+
+- about.tsx, 
+    <View style={styles.container}>
+      <Text>About</Text>
+    </View>
+
+- about.android.tsx, 
+    <View style={styles.container}>
+      <Text>Android About Screen</Text>
+    </View>
+
+- about.ios.tsx, 
+    <View style={styles.container}>
+      <Text>iOS About Screen</Text>
+    </View>
+
+- about.web.tsx
+    return (
+        <div style={{ padding: "20px", textAlign: "center"}}>
+            <h1>Welcome to the web About Page</h1>
+        </div>
+    )
+
+-------------------------------------------------------------------------
+
+ExpoRouter_APIRoutes
+
+1 GET method
+export async function GET() {
+    return Response.json({ messsage: "Hello world"});
+}
+
+2 API test crud operation in thunderclient
+GET, POST, GET (specific) PATCH, DELETE
